@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Autofac;
 using FluentValidation;
-using SiriusCRM.Abstractions.Buses;
-using SiriusCRM.Abstractions.Contracts;
-using SiriusCRM.Abstractions.Handlers;
+using SiriusCRM.Abstractions.CQRS.Buses;
+using SiriusCRM.Abstractions.CQRS.Contracts;
+using SiriusCRM.Abstractions.CQRS.Handlers;
 
 namespace SiriusCRM.Application.Buses
 {

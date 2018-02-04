@@ -1,4 +1,4 @@
-﻿namespace SiriusCRM.Abstractions.Contracts
+﻿namespace SiriusCRM.Abstractions.CQRS.Contracts
 {
     public interface ICommand
     {

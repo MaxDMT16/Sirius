@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SiriusCRM.Database.Entities;
 
 namespace SiriusCRM.Database.Context
@@ -20,7 +24,7 @@ namespace SiriusCRM.Database.Context
 
             modelBuilder.Entity<Product>()
                 .HasKey(product => product.Id);
-            
+
             modelBuilder.Entity<Category>()
                 .Property(c => c.Id)
                 .ValueGeneratedOnAdd();
@@ -32,6 +36,23 @@ namespace SiriusCRM.Database.Context
                 .HasOne(product => product.Category)
                 .WithMany(category => category.Products)
                 .HasForeignKey(product => product.CategoryId);
+        }
+
+        public IDbConnection Connection => Database.GetDbConnection();
+
+        public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        {
+            Set<TEntity>().AddRange(entities);
+        }
+
+        public void RemoveRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        {
+            Set<TEntity>().RemoveRange(entities);
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using SiriusCRM.Abstractions.Contracts;
+using SiriusCRM.Abstractions.CQRS.Contracts;
 
-namespace SiriusCRM.Abstractions.Buses
+namespace SiriusCRM.Abstractions.CQRS.Buses
 {
     public interface ICommandBus
     {

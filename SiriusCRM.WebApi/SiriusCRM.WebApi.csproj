@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SiriusCRM.Application\SiriusCRM.Application.csproj" />
     <ProjectReference Include="..\SiriusCRM.Database\SiriusCRM.Database.csproj" />
+    <ProjectReference Include="..\SiriusCRM.Domain\SiriusCRM.Domain.csproj" />
   </ItemGroup>
 
 </Project>

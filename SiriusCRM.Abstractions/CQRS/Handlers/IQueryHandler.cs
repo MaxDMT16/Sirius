@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using SiriusCRM.Abstractions.Contracts;
+using SiriusCRM.Abstractions.CQRS.Contracts;
 
-namespace SiriusCRM.Abstractions.Handlers
+namespace SiriusCRM.Abstractions.CQRS.Handlers
 {
-    public interface IQueryHandler<TQuery, TQueryResult>
+    public interface IQueryHandler<in TQuery, TQueryResult>
         where TQueryResult : IQueryResult
         where TQuery : IQuery<TQueryResult>
     {
