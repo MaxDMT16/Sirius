@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SiriusCRM.Abstractions.Contracts.Commands;
 using SiriusCRM.Abstractions.Contracts.Commands.Category;
@@ -10,6 +11,7 @@ using SiriusCRM.WebApi.Controllers.Base;
 
 namespace SiriusCRM.WebApi.Controllers
 {
+    [EnableCors("SiteCorsPolicy")]
     [Route("api/category")]
     public class CategoryController : OnBusController
     {
@@ -27,6 +29,18 @@ namespace SiriusCRM.WebApi.Controllers
 
         [HttpPost]
         public async Task CreateCategory(CreateCategoryCommand command)
+        {
+            await CommandBus.Execute(command);
+        }
+
+        [HttpPut]
+        public async Task UpdateCategory(UpdateCategoryCommand command)
+        {
+            await CommandBus.Execute(command);
+        }
+
+        [HttpDelete]
+        public async Task DeleteCategory(DeleteCategoryCommand command)
         {
             await CommandBus.Execute(command);
         }

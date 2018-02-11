@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,17 @@ namespace SiriusCRM.WebApi
             services.AddMvc();
             services.AddDbContext<SiriusDbContext>(builder => builder.UseSqlServer(connectionString));
 
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowAnyOrigin(); // For anyone access.
+            corsBuilder.AllowCredentials();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            });
+
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<ApplicationModule>();
             containerBuilder.RegisterModule<DatabaseModule>();
@@ -55,6 +67,8 @@ namespace SiriusCRM.WebApi
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseMvc();
+
+            app.UseCors("SiteCorsPolicy");
         }
     }
 }
