@@ -19,7 +19,7 @@ namespace SiriusCRM.Domain.Handlers.Commands.Category
 
             if (category == null)
             {
-                throw new InvalidOperationException($"Category wit id {category.Id} not found");
+                throw new InvalidOperationException($"Category wit id {command.Id} not found");
             }
 
             category.Name = command.Name;

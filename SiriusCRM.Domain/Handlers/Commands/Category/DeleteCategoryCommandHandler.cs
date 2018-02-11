@@ -15,16 +15,19 @@ namespace SiriusCRM.Domain.Handlers.Commands.Category
 
         public override async Task Execute(DeleteCategoryCommand command)
         {
-            var category = await DbContext.Categories.FirstOrDefaultAsync(c => c.Id == command.Id);
-
-            if (category == null)
+            foreach (var id in command.Ids)
             {
-                throw new InvalidOperationException($"Category with id {category.Id} not found");
+                var category = await DbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+
+                if (category == null)
+                {
+                    throw new InvalidOperationException($"Category with id {id} not found");
+                }
+
+                DbContext.Categories.Remove(category);
+
+                await DbContext.SaveChangesAsync();
             }
-
-            DbContext.Categories.Remove(category);
-
-            await DbContext.SaveChangesAsync();
         }
     }
 }
