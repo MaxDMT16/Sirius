@@ -19,6 +19,8 @@ namespace SiriusCRM.Domain
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .AsImplementedInterfaces();
+
+            builder.RegisterGeneric(typeof(InlineValidator<>)).As(typeof(IValidator<>));
         }
     }
 }
